@@ -48,3 +48,4 @@ void door_close() {
 	hardware_command_door_open(0);
 	*is_door_open = 0;
 }
+

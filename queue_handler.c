@@ -2,49 +2,57 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "queue_handler.h"
+#include "control_unit.h"
 
 
-void qh_add_order_in_priority_queue(int *priority, int f) {
+void qh_add_order_in_priority_queue(elevator_orders *orders, int f) {
     for (int i = 0; i<HARDWARE_NUMBER_OF_FLOORS; i++) {
-        if (priority[i]== -1) {
-            priority[i] = f;
+        if (orders->priority_queue[i]== -1) {
+            orders->priority_queue[i] = f;
         }
     }
 }
 
 
-
-void qh_fill_orders(int *orders, int *priority) {
+void qh_fill_orders(elevator_orders *orders, int *priority) {
     for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
             /* Internal orders */
         if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
-            orders[f][2] = 1;
-            qh_add_order_in_priority_queue(*priority, f);
+            orders->order_tabel[f][2] = 1;
+            qh_add_order_in_priority_queue(orders, f);
             //hardware_command_order_light(f, HARDWARE_ORDER_INSIDE, 1);
         }
 
             /* Orders going up */
         if(hardware_read_order(f, HARDWARE_ORDER_UP)){
-            orders[f][1] = 1;
-            qh_add_order_in_priority_queue(*priority, f);
+            orders->order_tabel[f][1] = 1;
+            qh_add_order_in_priority_queue(orders, f);
             //hardware_command_order_light(f, HARDWARE_ORDER_UP, 1);
         }
 
             /* Orders going down */
         if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
-            orders[f][0] = 1;
-            qh_add_order_in_priority_queue(*priority, f);
+            orders->order_tabel[f][0] = 1;
+            qh_add_order_in_priority_queue(orders, f);
             //hardware_command_order_light(f, HARDWARE_ORDER_DOWN, 1);
         }
     }
 }
 
-/*
-void qh_dequeue(int *priority, int f) {
-    for(int i = 0; i<HARDWARE_NUMBER_OF_FLOORS; i++) {
 
+void qh_dequeue(elevator_orders *orders, int f) {
+    for(int i = 0; i<HARDWARE_NUMBER_OF_FLOORS; i++) {
+        for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
+            if (orders->priority_queue[i] == f) {
+                while (i<HARDWARE_NUMBER_OF_FLOORS-1) {
+                   orders->priority_queue[i] = orders->priority_queue[i+1];     //Move the rest of the orders forward
+                }
+                orders->priority_queue[HARDWARE_NUMBER_OF_FLOORS-1] = -1;       //Set the last elemetnt to -1 (empty)
+            }
+        }
     }
 }
-*/
+
+
 
 
