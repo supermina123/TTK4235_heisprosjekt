@@ -3,6 +3,8 @@
 #include <signal.h>
 #include "hardware.h"
 #include "door.h"
+#include "time.h"
+
 
 static void clear_all_order_lights(){
     HardwareOrder order_types[3] = {

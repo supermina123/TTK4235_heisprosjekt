@@ -20,21 +20,21 @@ void qh_fill_orders(elevator_orders *orders, int *priority) {
         if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
             orders->order_tabel[f][2] = 1;
             qh_add_order_in_priority_queue(orders, f);
-            //hardware_command_order_light(f, HARDWARE_ORDER_INSIDE, 1);
+            hardware_command_order_light(f, HARDWARE_ORDER_INSIDE, 1);
         }
 
             /* Orders going up */
         if(hardware_read_order(f, HARDWARE_ORDER_UP)){
             orders->order_tabel[f][1] = 1;
             qh_add_order_in_priority_queue(orders, f);
-            //hardware_command_order_light(f, HARDWARE_ORDER_UP, 1);
+            hardware_command_order_light(f, HARDWARE_ORDER_UP, 1);
         }
 
             /* Orders going down */
         if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
             orders->order_tabel[f][0] = 1;
             qh_add_order_in_priority_queue(orders, f);
-            //hardware_command_order_light(f, HARDWARE_ORDER_DOWN, 1);
+            hardware_command_order_light(f, HARDWARE_ORDER_DOWN, 1);
         }
     }
 }
@@ -51,6 +51,18 @@ void qh_dequeue(elevator_orders *orders, int f) {
             }
         }
     }
+    for(int i = 0; i<3; i++) {                                                  //Delete row in order table. (All people entering)
+        orders->order_tabel[f][i] = 0;
+    }
+}
+
+int qh_is_queue_empty(elevator_orders *orders){
+    for(int i = 0; i<HARDWARE_NUMBER_OF_FLOORS; i++) {
+        if (orders->priority_queue[i]==-1) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 

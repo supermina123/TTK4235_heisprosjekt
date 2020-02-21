@@ -1,3 +1,5 @@
+#ifndef CONTROL_UNIT_H
+#define CONTROL_UNIT_H
 #include "hardware.h"
 
 /*
@@ -13,7 +15,6 @@ typedef struct {
     int priority_queue[HARDWARE_NUMBER_OF_FLOORS];
 }elevator_orders;
 
-
-
 int check_orders_at_floor(elevator_orders order, int f); 
 
+#endif
