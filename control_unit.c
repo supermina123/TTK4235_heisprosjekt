@@ -6,7 +6,7 @@
 
 int check_orders_at_floor(elevator_orders orders, int f) {
     for(int i = 0; i < 3; i++) {
-        if (orders.order_tabel[f][i]==1) {
+        if (orders.order_table[f][i]==1) {
             return 1;
         }
     }

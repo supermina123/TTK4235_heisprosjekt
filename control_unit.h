@@ -11,7 +11,7 @@ typedef enum {INIT_STATE,
 */
 
 typedef struct {
-    int order_tabel[HARDWARE_NUMBER_OF_FLOORS][3];
+    int order_table[HARDWARE_NUMBER_OF_FLOORS][3];
     int priority_queue[HARDWARE_NUMBER_OF_FLOORS];
 }elevator_orders;
 

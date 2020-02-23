@@ -6,11 +6,15 @@
 
 void qh_add_order_in_priority_queue(elevator_orders *orders, int f);
 
-void qh_fill_orders(elevator_orders *orders, int *priority);
+void qh_fill_orders(elevator_orders *orders);
 
 void qh_dequeue(elevator_orders *orders, int f);
 
 int qh_is_queue_empty(elevator_orders *orders);
+
+void qh_delete_all_orders(elevator_orders *orders);
+
+void print_orders(elevator_orders *orders);
 
 
 #endif
