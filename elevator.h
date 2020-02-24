@@ -3,6 +3,17 @@
 #define ELEVATOR_H
 #include "hardware.h"
 
+/**
+* @file
+* 
+* @brief Håndterer heis
+* 
+*/
+
+
+
+
+
 typedef enum {
 	UP,
 	DOWN
