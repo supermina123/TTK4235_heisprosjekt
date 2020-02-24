@@ -17,8 +17,8 @@
 
 
 typedef enum {
-	UP,
-	DOWN
+	DOWN,
+	UP
 }elevator_direction;
 
 extern int last_floor;
