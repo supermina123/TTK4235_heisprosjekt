@@ -6,13 +6,13 @@
 /**
 * @file
 * 
-* @brief Håndterer heis
+* @brief Handles the elevator
 * 
 */
 
 /**
-* @brief Definerer en enum med mulige retninger 
-* heisen kan ha
+* @brief Defines an enum with the possible 
+* directions the elevator can hold
 */
 
 
