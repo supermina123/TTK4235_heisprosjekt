@@ -34,8 +34,15 @@ typedef struct {
     int priority_queue[HARDWARE_NUMBER_OF_FLOORS];
 }elevator_orders;
 
+typedef struct{
+    elevator_direction last_dir;
+	  int last_floor;
+	  elevator_state state;
+}elevator_controller
+
 int floor_to_stop;
 int next_in_queue;
+int dir_elevator;
 
 /**
 * @brief Decides what to do with the next 
@@ -46,7 +53,10 @@ int next_in_queue;
 *
 */
 
-void decide_next_order_at_floor(elevator_orders *orders, elevator_state *state);
+void decide_next_order_at_floor(elevator_orders *orders, elevator_controller *controller);
+
+
+void decide_to_stop_at_floor(elevator_orders *orders, elevator_controller *controller);
 
 /**
 * @brief Drives the elevator in a direction
@@ -54,7 +64,7 @@ void decide_next_order_at_floor(elevator_orders *orders, elevator_state *state);
 */
 
 
-void driving(elevator_orders *orders, elevator_state *state);
+void driving(elevator_orders *orders, elevator_controller *controller);
 
 
 /** 
@@ -64,7 +74,7 @@ void driving(elevator_orders *orders, elevator_state *state);
 */
 
 
-void waiting_at_floor(elevator_orders *orders);
+void stop_at_floor(elevator_orders *orders, elevator_controller *controller);
 
 
 //HVA MED LYS???
