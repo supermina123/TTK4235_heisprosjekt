@@ -4,13 +4,16 @@
 
 
 
-/*
+
 void driving(elevator_orders *orders, elevator_states *state){
 	elevator_at_ends();
 	if (elevator_at_floor()) {
 		floor_to_stop = elevator_get_last_floor();
+		if (orders->order_table[][]){
+
+		}
 	}
-}*/
+}
 
 void decide_next_order_at_floor(elevator_orders *orders, elevator_state *state){
 	next_in_queue = orders->priority_queue[0];
@@ -27,3 +30,4 @@ void decide_next_order_at_floor(elevator_orders *orders, elevator_state *state){
 		*state = DRIVING_STATE
 	}
 }
+
