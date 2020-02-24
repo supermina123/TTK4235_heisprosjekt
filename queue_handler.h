@@ -14,6 +14,10 @@ int qh_is_queue_empty(elevator_orders *orders);
 
 void qh_delete_all_orders(elevator_orders *orders);
 
+int check_orders_at_floor(elevator_orders order, int f); 
+
+
+//print the orders
 void print_orders(elevator_orders *orders);
 
 

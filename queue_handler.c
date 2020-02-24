@@ -83,6 +83,15 @@ void qh_delete_all_orders(elevator_orders *orders){
     
 }
 
+int check_orders_at_floor(elevator_orders orders, int f) {
+    for(int i = 0; i < 3; i++) {
+        if (orders.order_table[f][i]==1) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void print_orders(elevator_orders *orders){
     printf("\nPRIORITY QUEUE:\n");
     for(int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++){
