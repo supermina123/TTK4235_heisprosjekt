@@ -9,7 +9,7 @@
 *
 */
 
-/*
+/**
 * @brief Adds an order in the pririty queue.
 * 
 * @param orders
