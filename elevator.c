@@ -45,10 +45,10 @@ void elevator_stop_at_floor() {
 
 void elevator_at_ends() {
 	if (hardware_read_floor_sensor(0)) {
-		hardware_command_movement(HARDWARE_MOVEMENT_UP);
+		elevator_set_motor_direction(HARDWARE_MOVEMENT_UP);
 	}
 	if (hardware_read_floor_sensor(HARDWARE_NUMBER_OF_FLOORS - 1)) {
-		hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+		elevator_set_motor_direction(HARDWARE_MOVEMENT_DOWN);
 	}
 }
 
