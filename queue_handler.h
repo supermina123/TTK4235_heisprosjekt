@@ -44,6 +44,9 @@ void qh_dequeue(elevator_orders *orders, int f);
 * is empty.
 *
 * @param orders
+*
+* @return 0 if queue empty
+* 1 if there are entries in queue
 */
 int qh_is_queue_empty(elevator_orders *orders);
 
