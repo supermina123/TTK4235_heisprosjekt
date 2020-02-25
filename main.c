@@ -40,26 +40,47 @@ int main(){
 
     elevator_orders orders;
     orders = (elevator_orders){ .order_table = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}}, .priority_queue = {-1,-1,-1,-1}};
+
+    elevator_controller ctrl;
+    ctrl = (elevator_controller){ .last_dir = UP, .last_floor = 1, .state = DRIVING_STATE};
+    
+
     int on = 1;
 
-    //elevator_set_motor_direction(HARDWARE_MOVEMENT_UP);
+    elevator_set_motor_direction(&ctrl, HARDWARE_MOVEMENT_UP);
+
     
     //Bare brukt til div testing av funskjoner
     while(on){
+        
         if(hardware_read_stop_signal()){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            on = 0;
-            break;
+            ctrl.state = EMERGENCY_STOP_STATE;
         }
 
-        
+        qh_fill_orders(&orders);
 
+        switch(ctrl.state){
+            case IDLE_STATE:
+                idle(&orders, &ctrl);
+                break; 
+
+            case DRIVING_STATE:
+                driving(&orders, &ctrl);
+                break;
+              
+            case STOP_AT_FLOOR_STATE:
+                stopping_at_floor(&orders, &ctrl);
+                break;
+            case EMERGENCY_STOP_STATE:
+                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                on = 0;
+                break;
+        }
 
     }
+
     print_orders(&orders);
-    qh_delete_all_orders(&orders);
-    print_orders(&orders);
-    clear_all_order_lights();
 
     return 0;
 }

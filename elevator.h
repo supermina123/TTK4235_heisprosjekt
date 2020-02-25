@@ -16,8 +16,7 @@
 * states the elevator can hold.
 *
 */
-typedef enum {INIT_STATE, 
-              DRIVING_STATE, 
+typedef enum {DRIVING_STATE, 
               STOP_AT_FLOOR_STATE, 
               EMERGENCY_STOP_STATE, 
               IDLE_STATE} elevator_state;
@@ -90,7 +89,7 @@ void elevator_stop_at_floor(elevator_controller *controller);
 * top, and up if it's at the bottom.
 *
 */
-void elevator_at_ends(elevator_controller *controller);
+int elevator_at_ends();
 
 
 #endif

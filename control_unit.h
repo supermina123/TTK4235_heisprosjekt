@@ -38,6 +38,10 @@ void decide_to_stop_at_floor(elevator_orders *orders, elevator_controller *contr
 
 void driving(elevator_orders *orders, elevator_controller *controller);
 
+void stopping_at_floor(elevator_orders *orders, elevator_controller *controller);
+
+void idle(elevator_orders *orders, elevator_controller *controller);
+
 
 
 //HVA MED LYS???

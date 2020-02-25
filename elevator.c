@@ -38,13 +38,14 @@ void elevator_stop_at_floor(elevator_controller *controller){
 	elevator_set_motor_direction(controller, HARDWARE_MOVEMENT_STOP);
 }
 
-void elevator_at_ends(elevator_controller *controller) {
+int elevator_at_ends(elevator_controller *controller) {
 	if (hardware_read_floor_sensor(0)) {
-		elevator_set_motor_direction(controller,HARDWARE_MOVEMENT_UP);
+		return 1;
 	}
 	if (hardware_read_floor_sensor(HARDWARE_NUMBER_OF_FLOORS - 1)) {
-		elevator_set_motor_direction(controller, HARDWARE_MOVEMENT_DOWN);
+		return 1;
 	}
+	return 0;
 }
 
 

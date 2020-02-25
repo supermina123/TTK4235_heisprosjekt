@@ -65,11 +65,14 @@ void qh_dequeue(elevator_orders *orders, int f) {
     for(int i = 0; i<3; i++) {                                                  //Delete row in order table. (All people entering)
         orders->order_table[f][i] = 0;
     }
+    hardware_command_order_light(f, HARDWARE_ORDER_INSIDE, 0);
+    hardware_command_order_light(f, HARDWARE_ORDER_UP, 0);
+    hardware_command_order_light(f, HARDWARE_ORDER_DOWN, 0);
 }
 
 int qh_is_queue_empty(elevator_orders *orders){
     for(int i = 0; i<HARDWARE_NUMBER_OF_FLOORS; i++) {
-        if (orders->priority_queue[i]==-1) {
+        if (orders->priority_queue[i]!=-1) {
             return 0;
         }
     }
