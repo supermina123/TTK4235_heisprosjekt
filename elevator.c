@@ -5,7 +5,6 @@
 
 
 void elevator_initialize(elevator_controller *controller){
-
 	while(!elevator_at_floor(controller)){
 		elevator_set_motor_direction(controller, HARDWARE_MOVEMENT_UP);
 	}
