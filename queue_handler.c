@@ -80,12 +80,16 @@ int qh_is_queue_empty(elevator_orders *orders){
 }
 
 void qh_delete_all_orders(elevator_orders *orders){
-    for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++){
-        orders->order_table[i][0] = 0;
-        orders->order_table[i][1] = 0;
-        orders->order_table[i][2] = 0;
-        orders->priority_queue[i] = -1;
+    for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+        orders->order_table[f][0] = 0;
+        orders->order_table[f][1] = 0;
+        orders->order_table[f][2] = 0;
+        orders->priority_queue[f] = -1;
+        hardware_command_order_light(f, HARDWARE_ORDER_INSIDE, 0);
+        hardware_command_order_light(f, HARDWARE_ORDER_UP, 0);
+        hardware_command_order_light(f, HARDWARE_ORDER_DOWN, 0);
     }
+
     
 }
 

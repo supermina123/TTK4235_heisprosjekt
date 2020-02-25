@@ -4,6 +4,7 @@
 #include "control_unit.h"
 #include "elevator.h"
 #include "queue_handler.h"
+#include "door.h"
 
 
 
@@ -42,18 +43,83 @@ void decide_next_order_at_floor(elevator_orders *orders, elevator_controller *co
 		controller->state = DRIVING_STATE;
 	}
 }
+void control_floor_indicator_lights(){
+	for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+        if(hardware_read_floor_sensor(f)){
+        	hardware_command_floor_indicator_on(f);
+        }
+    }
+}
 
 void stopping_at_floor(elevator_orders *orders, elevator_controller *controller){
 	qh_dequeue(orders, controller->last_floor);
-	sleep(2);
-	decide_next_order_at_floor(orders, controller);
+	if (door_get_status()){
+		if(!door_keep_open()){
+			door_close();
+			decide_next_order_at_floor(orders, controller);
+		}
+	}
+	else{
+		door_open();
+	}
+	
 }
 
 void idle(elevator_orders *orders, elevator_controller *controller){ //idle bare i en etasje
-	if(qh_is_queue_empty(orders) != 1){
+	if(!qh_is_queue_empty(orders)){
 		decide_next_order_at_floor(orders, controller);
-
 	}
+}
+void emergency_stop(elevator_orders *orders, elevator_controller *controller){
+	hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+	qh_delete_all_orders(orders);
+	while(hardware_read_stop_signal()){
+		hardware_command_stop_light(1);
+		if(elevator_at_floor(controller)){
+			door_open();
+		}
+	}
+	hardware_command_stop_light(0);
+	if(!door_keep_open()){
+		door_close();
+		controller->state = IDLE_STATE;
+	}
+	
+	
+	
+}
+
+void control_elevatorNimbus2000(elevator_orders *orders, elevator_controller *controller){
+	
+	elevator_initialize(controller);
+
+	while(1){
+
+        if(hardware_read_stop_signal()){
+            controller->state = EMERGENCY_STOP_STATE;
+        }
+        qh_fill_orders(orders);
+        control_floor_indicator_lights();
+
+        switch(controller->state){
+            
+            case IDLE_STATE:
+                idle(orders, controller);
+                break; 
+
+            case DRIVING_STATE:
+                driving(orders, controller);
+                break;
+              
+            case STOP_AT_FLOOR_STATE:
+		        stopping_at_floor(orders, controller);
+                break;
+
+            case EMERGENCY_STOP_STATE:
+                emergency_stop(orders, controller);
+                break;
+        }
+    }
 }
 	
 	

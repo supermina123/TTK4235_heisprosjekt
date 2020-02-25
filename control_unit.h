@@ -30,6 +30,8 @@ void decide_next_order_at_floor(elevator_orders *orders, elevator_controller *co
 
 void decide_to_stop_at_floor(elevator_orders *orders, elevator_controller *controller);
 
+void control_floor_indicator_lights();
+
 /**
 * @brief Drives the elevator in a direction
 *
@@ -42,6 +44,7 @@ void stopping_at_floor(elevator_orders *orders, elevator_controller *controller)
 
 void idle(elevator_orders *orders, elevator_controller *controller);
 
+void control_elevatorNimbus2000(elevator_orders *orders, elevator_controller *controller);
 
 
 //HVA MED LYS???

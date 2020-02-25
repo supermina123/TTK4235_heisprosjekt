@@ -46,7 +46,7 @@ typedef struct elevator_controller{
 
 
 
-
+void elevator_initialize(elevator_controller *controller);
 
 /** 
 * @brief Gets last direction of elevator

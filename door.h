@@ -13,8 +13,7 @@
 */
 //int is_door_open;
 
-//void door_start_timer();
-void initialize_time();
+
 /**
 * @brief Pointer to when the door
 * was opened.

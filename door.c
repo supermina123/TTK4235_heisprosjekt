@@ -26,22 +26,16 @@ typedef struct {int *is_door_open,
 
 time_t door_time_opened_pointer;
 
-void initialize_time(){
- 	door_time_opened_pointer = time(NULL);    
-}
-
 
 int door_keep_open() {
 	if (hardware_read_obstruction_signal()){
 		door_time_opened_pointer = time(NULL);
 		return 1;
 	}
-    else if (time(NULL) < door_time_opened_pointer + DOOR_OPEN_INTERVAL) {
+    if(time(NULL) < door_time_opened_pointer + DOOR_OPEN_INTERVAL) {
 		return 1;
 	}
-	else{
-		return 0;
-	}
+	return 0;
 }
 
 
@@ -51,7 +45,6 @@ int door_get_status() {
 
 
 void door_open() {
-
 	hardware_command_door_open(1);
     door_time_opened_pointer = time(NULL);  //oppdater klokken
 	is_door_open = 1;
