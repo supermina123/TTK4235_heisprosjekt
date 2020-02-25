@@ -13,7 +13,6 @@
 * states the elevator can hold.
 *
 */
-
 typedef enum {INIT_STATE, 
               DRIVING_STATE, 
               STOP_AT_FLOOR_STATE, 
@@ -27,13 +26,18 @@ typedef enum {INIT_STATE,
 * matrix, and a priority queue with 
 * HARDWARE_NUMBER_OF_FLOORS entries.
 *
-**/
-
+*/
 typedef struct {
     int order_table[HARDWARE_NUMBER_OF_FLOORS][3];
     int priority_queue[HARDWARE_NUMBER_OF_FLOORS];
 }elevator_orders;
 
+
+/**
+* @brief Defines a struct containing the 
+* previous direction, previous floor and 
+* the present state.
+*/
 typedef struct{
     elevator_direction last_dir;
 	  int last_floor;
