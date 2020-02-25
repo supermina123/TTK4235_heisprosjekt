@@ -42,7 +42,7 @@ int main(){
     orders = (elevator_orders){ .order_table = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}}, .priority_queue = {-1,-1,-1,-1}};
     int on = 1;
 
-    elevator_set_motor_direction(HARDWARE_MOVEMENT_UP);
+    //elevator_set_motor_direction(HARDWARE_MOVEMENT_UP);
     
     //Bare brukt til div testing av funskjoner
     while(on){
@@ -53,12 +53,6 @@ int main(){
         }
 
         
-
-        elevator_at_ends();
-
-        if (elevator_at_floor()){
-            elevator_set_motor_direction(HARDWARE_MOVEMENT_STOP);
-        }
 
 
     }

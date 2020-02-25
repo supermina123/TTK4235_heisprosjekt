@@ -1,6 +1,6 @@
 #ifndef QUEUE_HANDLER_H
 #define QUEUE_HANDLER_H
-#include "control_unit.h"
+
 
 /**
 * @file
@@ -8,6 +8,20 @@
 * and order table
 *
 */
+
+/**
+* @brief Defines a struct containing an order
+* table in the shape of a HARDWARE_NUMBER_OF_FLOORS*3 
+* matrix, and a priority queue with 
+* HARDWARE_NUMBER_OF_FLOORS entries.
+*
+*/
+typedef struct elevator_orders{
+    int order_table[HARDWARE_NUMBER_OF_FLOORS][3];
+    int priority_queue[HARDWARE_NUMBER_OF_FLOORS];
+}elevator_orders;
+
+
 
 /**
 * @brief Adds an order in the pririty queue.
@@ -59,19 +73,15 @@ int qh_is_queue_empty(elevator_orders *orders);
 */
 void qh_delete_all_orders(elevator_orders *orders);
 
-<<<<<<< HEAD
-int qh_orders_at_floor(elevator_orders order, int f); 
-=======
-
-
 /**
 * @brief Checks if there are orders at a floor f.
 *
 * @param order
 * @param f
 */
-int check_orders_at_floor(elevator_orders order, int f); 
->>>>>>> 96681824f482906815cbb78e57ad9bd0001c01f9
+
+int qh_orders_at_floor(elevator_orders order, int f); 
+
 
 
 /**

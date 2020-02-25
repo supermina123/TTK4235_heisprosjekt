@@ -1,6 +1,33 @@
 #ifndef DOOR_H
 #define DOOR_H
-//int door_keep_open();
+#include <time.h>
+
+/**
+* @file
+* @brief Handles the door
+*/
+
+/**
+* @brief Int showing whether or not
+* door is open.
+*/
+//int is_door_open;
+
+time_t time(time_t *t);
+
+/**
+* @brief Pointer to when the door
+* was opened.
+*/
+//time_t door_time_opened_pointer;
+
+
+/**
+* @brief Keeps the door open when 1,
+* and closed when 0.
+*/
+
+int door_keep_open();
 
 /**
 * @brief Fetches the status of the door.
