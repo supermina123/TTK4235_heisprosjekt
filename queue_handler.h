@@ -1,6 +1,6 @@
 #ifndef QUEUE_HANDLER_H
 #define QUEUE_HANDLER_H
-
+#include "hardware.h"
 
 /**
 * @file
@@ -91,6 +91,11 @@ void qh_delete_all_orders(elevator_orders *orders);
 */
 
 int qh_orders_at_floor(elevator_orders order, int f); 
+
+/**
+* @brief Turn off all order lights.
+*/
+void qh_clear_all_order_lights();
 
 
 

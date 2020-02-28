@@ -28,8 +28,9 @@ typedef enum {DRIVING_STATE,
 	DOWN,
 	UP}elevator_direction;
 
-/*! \struct elevator_controller
- * Defines a struct holding information about the direction, position and state
+/**
+ * @brief
+ * Defines a struct holding information about the direction, the position and the state
  * of the elevator.
  */
 typedef struct elevator_controller{
@@ -91,9 +92,5 @@ int elevator_at_floor(elevator_controller *controller);
 * @param[in] controller Controller to stop. 
 */
 void elevator_stop_at_floor(elevator_controller *controller);
-
-
-//int elevator_at_ends();
-
 
 #endif

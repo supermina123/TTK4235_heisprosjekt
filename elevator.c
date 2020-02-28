@@ -8,6 +8,9 @@ void elevator_initialize(elevator_controller *controller){
 	while(!elevator_at_floor(controller)){
 		elevator_set_motor_direction(controller, HARDWARE_MOVEMENT_UP);
 	}
+	elevator_set_motor_direction(controller, HARDWARE_MOVEMENT_STOP);
+	controller->state = IDLE_STATE;
+	printf("Floor %d\n", controller->last_floor);
 }
 
 elevator_direction elevator_get_last_direction(elevator_controller *controller) {
@@ -42,17 +45,6 @@ int elevator_at_floor(elevator_controller *controller) {
 void elevator_stop_at_floor(elevator_controller *controller){
 	elevator_set_motor_direction(controller, HARDWARE_MOVEMENT_STOP);
 }
-
-int elevator_at_ends(elevator_controller *controller) {
-	if (hardware_read_floor_sensor(0)) {
-		return 1;
-	}
-	if (hardware_read_floor_sensor(HARDWARE_NUMBER_OF_FLOORS - 1)) {
-		return 1;
-	}
-	return 0;
-}
-
 
 
 
