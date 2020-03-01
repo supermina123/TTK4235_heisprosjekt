@@ -25,16 +25,13 @@ void qh_fill_orders(elevator_orders *orders) {
             orders->order_table[f][2] = 1;
             qh_add_order_in_priority_queue(orders, f);
             hardware_command_order_light(f, HARDWARE_ORDER_INSIDE, 1);
-        
         }
-
             /* Orders going up */
         if(hardware_read_order(f, HARDWARE_ORDER_UP)){
             orders->order_table[f][1] = 1;
             qh_add_order_in_priority_queue(orders, f);
             hardware_command_order_light(f, HARDWARE_ORDER_UP, 1);
         }
-
             /* Orders going down */
         if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
             orders->order_table[f][0] = 1;

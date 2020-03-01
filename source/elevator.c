@@ -10,7 +10,6 @@ void elevator_initialize(elevator_controller *controller){
 	}
 	elevator_set_motor_direction(controller, HARDWARE_MOVEMENT_STOP);
 	controller->state = IDLE_STATE;
-	printf("Floor %d\n", controller->last_floor);
 }
 
 elevator_direction elevator_get_last_direction(elevator_controller *controller) {
