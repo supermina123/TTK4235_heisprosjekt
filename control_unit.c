@@ -3,8 +3,6 @@
 #include "control_unit.h"
 
 
-
-
 void ctrl_driving(elevator_orders *orders, elevator_controller *controller){
 	if (elevator_at_floor(controller)) {
 		ctrl_decide_to_stop_at_floor(orders, controller);
